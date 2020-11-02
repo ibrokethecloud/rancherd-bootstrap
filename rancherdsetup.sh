@@ -134,7 +134,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      longhorn: true
+      app: longhorn
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
