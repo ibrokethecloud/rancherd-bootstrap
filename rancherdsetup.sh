@@ -1,7 +1,7 @@
 #!/bin/sh
 mkdir -p /var/lib/rancher/rke2/server/manifests
 
-cat > /var/lib/rancher/k3s/server/manifests/setup.yaml << EOF
+cat > /var/lib/rancher/rke2/server/manifests/setup.yaml << EOF
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
 metadata:
