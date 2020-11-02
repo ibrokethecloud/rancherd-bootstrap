@@ -23,8 +23,8 @@ metadata:
   namespace: fleet-default
 spec:
   selector:
-  matchLabels:
-    clusterType: dev
+    matchLabels:
+      clusterType: dev
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: ClusterGroup
@@ -33,8 +33,8 @@ metadata:
   namespace: fleet-default
 spec:
   selector:
-  matchLabels:
-    clusterType: test
+    matchLabels:
+      clusterType: test
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: ClusterGroup
@@ -43,8 +43,8 @@ metadata:
   namespace: fleet-default
 spec:
   selector:
-  matchLabels:
-    clusterType: prod 
+    matchLabels:
+      clusterType: prod 
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
@@ -86,7 +86,7 @@ spec:
   repo: https://github.com/ibrokethecloud/user-bundles
   targets:
   - clusterSelector: {}  
---      
+---      
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
 metadata:
