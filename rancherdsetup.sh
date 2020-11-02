@@ -126,6 +126,29 @@ spec:
   targets:
   - clusterGroup: prod
 ---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  name: longhorn
+  namespace: fleet-default
+spec:
+  selector:
+    matchLabels:
+      longhorn: true
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: longhorn
+  namespace: fleet-default
+spec:
+  branch: master
+  paths:
+  - longhorn
+  - longhorn-crd
+  repo: https://github.com/ibrokethecloud/core-bundles
+  targets:
+  - clusterGroup: longhorn
 EOF
 
 ## Appending some defaults to help manage rancherd
