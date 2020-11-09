@@ -149,6 +149,15 @@ spec:
   repo: https://github.com/ibrokethecloud/core-bundles
   targets:
   - clusterGroup: longhorn
+---
+apiVersion: resources.cattle.io/v1
+kind: Backup
+metadata:
+  name: daily-backup
+spec:
+  resourceSetName: rancher-resource-set
+  retentionCount: 5
+  schedule: @midnight  
 EOF
 
 ## Appending some defaults to help manage rancherd
