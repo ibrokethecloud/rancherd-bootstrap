@@ -157,7 +157,7 @@ metadata:
 spec:
   resourceSetName: rancher-resource-set
   retentionCount: 5
-  schedule: @midnight  
+  schedule: "@midnight" 
 EOF
 
 ## Appending some defaults to help manage rancherd
