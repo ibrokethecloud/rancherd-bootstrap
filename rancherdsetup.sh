@@ -24,7 +24,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      clusterType: dev
+      envType: dev
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: ClusterGroup
@@ -34,7 +34,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      clusterType: test
+      envType: test
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: ClusterGroup
@@ -44,7 +44,47 @@ metadata:
 spec:
   selector:
     matchLabels:
-      clusterType: prod 
+      envType: prod 
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  name: monitoring
+  namespace: fleet-default
+spec:
+  selector:
+    matchLabels:
+      monitoring: enabled
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  name: logging
+  namespace: fleet-default
+spec:
+  selector:
+    matchLabels:
+      logging: enabled
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  name: longhorn
+  namespace: fleet-default
+spec:
+  selector:
+    matchLabels:
+      longhorn: enabled
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  name: cis-benchmark
+  namespace: fleet-default
+spec:
+  selector:
+    matchLabels:
+      cis-benchmark: enabled
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
@@ -58,7 +98,7 @@ spec:
   - monitoring-crd
   repo: https://github.com/ibrokethecloud/core-bundles
   targets:
-  - clusterSelector: {} 
+  - clusterGroup: monitoring
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
@@ -72,7 +112,7 @@ spec:
   - logging-crd
   repo: https://github.com/ibrokethecloud/core-bundles
   targets:
-  - clusterSelector: {}   
+  - clusterGroup: logging
 ---
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
@@ -85,7 +125,7 @@ spec:
   - loki
   repo: https://github.com/ibrokethecloud/user-bundles
   targets:
-  - clusterSelector: {}  
+  - clusterGroup: logging
 ---      
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
@@ -127,16 +167,6 @@ spec:
   - clusterGroup: prod
 ---
 apiVersion: fleet.cattle.io/v1alpha1
-kind: ClusterGroup
-metadata:
-  name: longhorn
-  namespace: fleet-default
-spec:
-  selector:
-    matchLabels:
-      app: longhorn
----
-apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
 metadata:
   name: longhorn
@@ -149,6 +179,20 @@ spec:
   repo: https://github.com/ibrokethecloud/core-bundles
   targets:
   - clusterGroup: longhorn
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: cis-benchmark
+  namespace: fleet-default
+spec:
+  branch: master
+  paths:
+  - cis-benchmark
+  - cis-benchmark-crd
+  repo: https://github.com/ibrokethecloud/core-bundles
+  targets:
+  - clusterGroup: cis-benchmark
 ---
 apiVersion: resources.cattle.io/v1
 kind: Backup
